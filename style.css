@@ -482,3 +482,114 @@ button:active{transform:scale(.985)}
 .v3-shell .side-nav::-webkit-scrollbar-track,.v3-shell .side-nav::-webkit-scrollbar-thumb{background:transparent!important}
 
 .push-settings{margin-bottom:24px}.push-settings .head-actions{justify-content:flex-start;flex-wrap:wrap}.push-settings .muted{font-size:.9rem;color:#5a6b63;margin-top:20px}
+
+/* Care V3 · refinement: shared rhythm, field priorities and client hospitality */
+.v3-shell{background:#f5f6f2;color:#263b32;--green-deep:#254d3e;--green:#abd879}
+.v3-shell .v3-main{max-width:1600px;width:100%;min-width:0;padding:28px 40px 56px}
+.v3-shell .page-head{margin:26px 0 30px;gap:20px}
+.v3-shell .page-head h1{letter-spacing:-1.2px;font-weight:650;line-height:1.12}
+.v3-shell .sync-state{font-size:12px;color:#68766f;margin-top:12px}
+.v3-shell .eyebrow{font-size:10px;letter-spacing:1.8px;line-height:1.6}
+.v3-shell .card,.v3-shell .mission-card{border:1px solid #e1e7df;box-shadow:0 5px 22px #213c2b04;border-radius:20px}
+.v3-shell .card{padding:26px}
+.v3-shell .section{margin-top:30px}
+.v3-shell .section>h2,.v3-shell .section-title h2{font-size:19px;letter-spacing:-.4px;margin-bottom:16px}
+.v3-shell .v3-hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#e8efdf,#f4f7ed);border:1px solid #dbe5d0;border-radius:24px;padding:34px;margin-bottom:24px}
+.v3-shell .v3-hero h2{font-size:clamp(27px,3vw,42px);line-height:1.15;letter-spacing:-1.3px;max-width:720px;margin:14px 0}
+.v3-shell .v3-hero p{max-width:610px;line-height:1.7;font-size:15px;color:#53665b}
+.v3-shell .metrics{gap:12px}
+.v3-shell .metrics .card{padding:20px 22px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;min-height:112px}
+.v3-shell .metrics .card span{font-size:12px;color:#617268;line-height:1.45}
+.v3-shell .metrics strong{font-size:31px;font-weight:600;letter-spacing:-1px}
+.v3-shell .btn{min-height:44px;padding:11px 19px;border-radius:13px;font-size:13px;line-height:1.45;transition:background .18s ease,box-shadow .18s ease;border-color:#dce4db}
+.v3-shell .btn.primary{background:#2d5744;color:#fff;border-color:#2d5744}
+.v3-shell button:focus-visible,dialog button:focus-visible{outline:3px solid #82995d;outline-offset:3px}
+.v3-shell .mission-card{padding:23px;text-align:left;gap:18px;transition:border-color .18s,background .18s;min-width:0}
+.v3-shell .mission-card h3{font-size:18px;margin:7px 0;letter-spacing:-.3px}
+.v3-shell .mission-card p{font-size:13px;color:#617268;line-height:1.6}
+.v3-shell .mission-card small{font-size:12px;color:#66786d}
+.v3-shell .mission-card>div{min-width:0;overflow-wrap:anywhere}
+.v3-shell .status{font-size:10px;letter-spacing:.6px;padding:7px 10px;white-space:normal;flex-shrink:0}
+.v3-shell .sidebar{background:#213e32;border-right:1px solid #ffffff0a}
+.v3-shell .side-link{border-radius:11px;font-size:13px;min-height:45px;margin:2px 0;padding:12px;gap:12px}
+.v3-shell .side-link.active{background:#f4f6ed;color:#284534}
+.v3-shell .side-nav{padding-right:0;scrollbar-gutter:auto}
+.v3-shell .sidebar-footer{padding-top:16px}
+.v3-shell .sidebar-brand{padding-bottom:24px}
+.v3-shell .sidebar-brand img{width:45px;height:45px;border-radius:13px}
+.v3-shell .sidebar-brand strong{font-size:16px}
+.v3-shell .empty-state{padding:24px;border:1px dashed #d6dfd4;background:#f9faf7;border-radius:14px;color:#68796b;font-size:14px}
+.v3-shell .mission-summary h2{font-size:28px;letter-spacing:-.7px;margin:18px 0}
+.v3-shell .mission-summary p{font-size:14px;line-height:1.75}
+.v3-shell .task-count{font-size:13px;color:#5b6e60;background:#edf2e8;border-radius:20px;padding:6px 12px}
+.v3-shell .task-progress{appearance:none;width:100%;height:5px;border:0;border-radius:9px;overflow:hidden;background:#e6ebdf;margin-bottom:15px}
+.task-progress::-webkit-progress-bar{background:#e6ebdf}.task-progress::-webkit-progress-value{background:#729b55}.task-progress::-moz-progress-bar{background:#729b55}
+.v3-shell .task-row{padding:20px 0;gap:14px;align-items:center}
+.v3-shell .task-row p{font-size:12px;color:#68776a;margin:6px 0}
+.v3-shell .task-row.is-complete .task-indicator{background:#dcead6;color:#375e2e}
+.v3-shell .task-indicator{border-radius:50%;width:30px;height:30px;display:grid;place-items:center;flex-shrink:0;background:#f0f3ec}
+.v3-shell .participation-section summary{font-weight:650;font-size:16px;cursor:pointer;min-height:44px;align-content:center}
+.v3-shell .v3-photos figure{border-radius:16px;overflow:hidden;background:#f7f8f4;border:1px solid #e3e8dd;margin:0}
+.v3-shell .v3-photos figcaption{padding:14px;font-size:12px;line-height:1.6}
+.v3-shell .v3-photos img{object-fit:contain;background:#edf0e8;max-height:320px}
+.agent-steps{display:flex;flex-wrap:wrap;gap:12px 24px;border-top:1px solid #d4dfc9;padding-top:20px;margin-top:26px;font-size:12px;color:#577146}
+.portal-agent .mission-summary{border-top:3px solid #83ad5a}
+.portal-agent .participation-section{padding:14px 24px}
+.portal-agent .task-row:not(.is-complete) .btn{background:#2d5744;color:white}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;position:relative;z-index:1}
+.hero-signature{position:absolute;right:20px;bottom:-30px;font-family:inherit;font-size:140px;letter-spacing:-10px;color:#ffffff07;pointer-events:none}
+.v3-shell.portal-client{background:#f5f7f3;--green-deep:#334d43;--green:#abd879;color:#293d34}
+.portal-client .sidebar{background:#21382f}
+.portal-client .sidebar-brand strong span,.portal-client .care-header-brand b{color:#668e42}
+.portal-client .sidebar-brand strong span{color:#abd879}
+.portal-client .sidebar .side-link.active{background:#e8f0df;color:#293d34}
+.portal-client .v3-hero{background:radial-gradient(ellipse at top right,#3a5749,transparent 70%),#213c31;border-color:#213c31;padding:44px;color:#f7faf3}
+.portal-client .v3-hero .eyebrow{color:#b6d990}
+.portal-client .v3-hero h2{font-family:inherit;font-weight:600;font-size:clamp(32px,3.6vw,52px);letter-spacing:-1.4px;max-width:800px}
+.portal-client .v3-hero p{color:#d0d9ce;max-width:540px}
+.portal-client .v3-hero .btn.primary{background:#abd879;border-color:#abd879;color:#263c30}
+.portal-client .v3-hero .btn:not(.primary){background:transparent;border-color:#6b7c69;color:#f4f0e5}
+.portal-client .card,.portal-client .mission-card{border-color:#dfe7d9;background:#fff;box-shadow:0 8px 24px #274b3204}
+.portal-client .metrics .card{border-top:2px solid #abd879}
+.portal-client .metrics strong{font-family:inherit;font-weight:600;color:#354f40;font-size:38px}
+.portal-client .mission-summary h2{font-family:inherit;font-weight:600;font-size:34px}
+.portal-client .empty-state{background:#f8faf5;border-color:#dce6d4}
+.portal-client .btn.primary{background:#334f40;border-color:#334f40}
+.portal-client .eyebrow{color:#587b3e}
+@media(hover:hover){.v3-shell .mission-card:hover{background:#f9fbf5;border-color:#9eb390}.v3-shell .btn:hover{box-shadow:0 3px 10px #27412c12}.v3-shell .btn.primary:hover{background:#234536}.portal-client .v3-hero .btn.primary:hover{background:#bce393}}
+@media(max-width:1100px){.v3-shell .v3-main{padding:24px}.v3-shell .page-head .head-actions{justify-content:flex-start}.v3-shell .page-head h1{font-size:32px}}
+@media(max-width:767px){
+.v3-shell .v3-main{padding:12px 16px calc(96px + env(safe-area-inset-bottom))}.v3-shell.with-agent-dock .v3-main{padding-bottom:calc(230px + env(safe-area-inset-bottom))}
+.v3-shell .v3-top{padding:9px 0;margin:0 0 24px;background:#f5f6f2f5}.portal-client .v3-top{background:#f5f7f3f5}
+.v3-shell .page-head{margin:16px 0 24px;gap:14px}.v3-shell .page-head h1{font-size:29px}.v3-shell .page-head .eyebrow{font-size:9px}.v3-shell .sync-state{font-size:10px;line-height:1.5}
+.v3-shell .v3-hero,.portal-client .v3-hero{padding:25px 22px;border-radius:20px}.v3-shell .v3-hero h2{font-size:28px}.portal-client .v3-hero h2{font-size:34px}.v3-shell .v3-hero p{font-size:13px}
+.v3-shell .metrics{gap:10px}.v3-shell .metrics .card{padding:15px;min-height:94px}.v3-shell .metrics strong{font-size:28px}.v3-shell .metrics .card span{font-size:11px}
+.portal-agent .metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.portal-agent .metrics .card{padding:12px}
+.v3-shell .card{padding:20px}.v3-shell .section{margin-top:24px}.v3-shell .mission-card{padding:18px;gap:10px}.v3-shell .mission-card h3{font-size:16px}.v3-shell .mission-card>span:last-child{display:none}
+.v3-shell .mission-card p{font-size:12px}.v3-shell .status{font-size:9px}.v3-shell .mission-summary h2{font-size:25px}
+.v3-shell .task-row{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px}.v3-shell .task-row>.btn{grid-column:2;justify-self:start;min-width:140px;min-height:46px}.v3-shell .task-row strong{font-size:14px;line-height:1.5}
+.v3-shell .care-agent-dock{background:#fff;border-top:1px solid #dae3d3;box-shadow:0 -5px 25px #223d2a12}.care-dock-progress strong{font-size:13px}.v3-shell .care-dock-tools .btn{padding:9px 6px;font-size:12px;border-radius:12px;min-height:48px}
+.agent-steps{gap:8px 14px;font-size:10px;margin-top:20px;padding-top:16px}.hero-actions .btn{width:100%}.hero-signature{font-size:110px}
+.v3-shell .v3-bottom{background:#ffff7;border-top:1px solid #e0e5db;backdrop-filter:blur(12px)}.v3-shell .v3-bottom button.active{color:#31573f;background:#edf2e6;border-radius:12px}.portal-client .v3-bottom button.active{background:#eaf2e1;color:#375531}
+}
+@media(prefers-reduced-motion:reduce){.v3-shell *{transition:none!important;scroll-behavior:auto!important}}
+.v3-shell .mission-instructions{border-top:1px solid #e1e7db;border-bottom:1px solid #e1e7db;margin:18px 0;padding:4px 0}
+.v3-shell .mission-instructions summary{min-height:48px;align-content:center;font-size:14px;font-weight:600;cursor:pointer}
+.v3-shell .mission-instructions p{margin:8px 0 16px}
+.portal-agent .mission-summary{padding:22px}.portal-agent .mission-summary p:empty{display:none}
+
+.portal-client .metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:767px){.portal-client .metrics .card{padding:12px}.portal-client .v3-hero h2{font-size:30px;letter-spacing:-1px}}
+/* Client: strictly Azzera greens and white */
+.v3-shell.portal-client{background:#fff;color:#244534}
+.portal-client .v3-top{background:#fffffff5}
+.portal-client .card,.portal-client .mission-card{background:#fff;border-color:#e0ebdb}
+.portal-client .v3-hero{background:linear-gradient(120deg,#213e32,#355c43);color:#fff}
+.portal-client .v3-hero h2,.portal-client .v3-hero .btn:not(.primary){color:#fff}
+.portal-client .v3-hero p{color:#e2efda}
+.portal-client .v3-hero .btn:not(.primary){border-color:#9cbd89}
+.portal-client h1,.portal-client h2,.portal-client h3{color:#244534}
+.portal-client .metrics .card span,.portal-client .sync-state,.portal-client .mission-card p,.portal-client .mission-card small{color:#516f55}
+.portal-client .status{background:#edf5e7;color:#4e7738}
+.portal-client .empty-state{background:#f7fbf3;color:#587348;border-color:#dce8d2}
+.portal-client .v3-bottom{background:#fffffff7}

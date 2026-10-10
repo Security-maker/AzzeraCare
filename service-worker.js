@@ -1,4 +1,4 @@
-const CACHE='azzera-care-v3-shell-3';
+const CACHE='azzera-care-v3-shell-4';
 const ASSETS=['./index.html','./style.css','./app.js','./modules/push.js','./modules/reports.js','./modules/domain.js','./modules/icons.js','./care-backend.js','./vendor/supabase.js','./manifest.json','./assets/logo-azzera.png','./assets/favicon.png','./assets/icons/icon-192.png','./assets/icons/icon-512.png'];
 const allowed=new Set(ASSETS.map(p=>new URL(p,self.location.href).href));
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
