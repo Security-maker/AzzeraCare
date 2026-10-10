@@ -18,6 +18,16 @@ export const api={configured,client,
   assert();const {data,error}=await client.rpc('care_v3_accept_request',{p_request_id:requestId,p:payload,p_key:key});
   if(error){if(['PGRST202','42883'].includes(error.code))throw new Error('La mise à jour SQL Demandes → interventions doit être installée dans Supabase avant cette action.');throw error;}return data;
  },
+ async createUser(payload){
+  assert();const {data,error}=await client.functions.invoke('create-user',{body:payload});
+  if(error){let detail='';try{const body=await error.context.clone().json();detail=body?.error||body?.message||'';}catch{}throw new Error(detail||'Création impossible. Vérifie que la fonction create-user est déployée dans Supabase.');}
+  if(data?.error)throw new Error(data.error);if(!data?.ok)throw new Error('Création non confirmée par le serveur');return data;
+ },
+ async changePassword(currentPassword,password){
+  assert();const {user}=await unwrap(client.auth.getUser());if(!user?.email)throw new Error('Reconnecte-toi pour modifier ton mot de passe');
+  await unwrap(client.auth.signInWithPassword({email:user.email,password:currentPassword}));
+  await unwrap(client.auth.updateUser({password}));
+ },
  async invite(payload){
   assert();const {data,error}=await client.functions.invoke('invite-user',{body:payload});
   if(error){
