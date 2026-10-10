@@ -7,7 +7,18 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Azzera Care" />
-  <title>Azzera Care — V3</title>
+  <title>Azzera Care</title>
+  <meta property="og:title" content="Azzera Care" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="L’espace professionnel Azzera Care pour le QG et les agents" />
+  <meta name="twitter:title" content="Azzera Care" />
+  <meta name="twitter:card" content="summary" />
+  <script>
+    if(new URLSearchParams(location.search).get("portal")==="client"||location.pathname.endsWith("/client.html")){
+      document.title="Azzera Care Portail client";
+      for(const selector of ['meta[property="og:title"]','meta[name="twitter:title"]','meta[name="apple-mobile-web-app-title"]'])document.querySelector(selector)?.setAttribute("content",document.title);
+    }
+  </script>
   <meta name="description" content="Azzera Care — application privée de pilotage, d'intervention et de traçabilité d'Azzera Services+." />
   <link rel="manifest" href="./manifest.json" />
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-a-16.png" />

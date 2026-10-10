@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f8faf8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Azzera Care Portail client" />
+  <title>Azzera Care Portail client</title>
+  <meta property="og:title" content="Azzera Care Portail client" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Vos prestations, comptes-rendus et demandes dans votre espace client Azzera Care" />
+  <meta name="twitter:title" content="Azzera Care Portail client" />
+  <meta name="twitter:card" content="summary" />
+  <script>
+    if(new URLSearchParams(location.search).get("portal")==="client"||location.pathname.endsWith("/client.html")){
+      document.title="Azzera Care Portail client";
+      for(const selector of ['meta[property="og:title"]','meta[name="twitter:title"]','meta[name="apple-mobile-web-app-title"]'])document.querySelector(selector)?.setAttribute("content",document.title);
+    }
+  </script>
+  <meta name="description" content="Vos prestations, comptes-rendus et demandes dans votre espace client Azzera Care" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-a-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-a-32.png" />
+  <link rel="icon" type="image/svg+xml" sizes="any" href="./assets/favicon-a.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-care-large.png" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="app">
+    <div class="boot-screen">
+      <img src="./assets/logo-azzera.png" alt="Azzera Services+" class="boot-logo" />
+      <div class="boot-wordmark">AZZERA <span>CARE</span></div>
+      <div class="boot-line"><span></span></div>
+    </div>
+  </div>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+  <script src="./vendor/supabase.js"></script>
+  <script src="./config.js"></script>
+  <script src="./register-sw.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

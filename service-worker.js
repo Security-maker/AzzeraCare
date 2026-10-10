@@ -1,5 +1,5 @@
-const CACHE='azzera-care-v3-shell-7';
-const ASSETS=['./index.html','./style.css','./app.js','./modules/push.js','./modules/reports.js','./modules/domain.js','./modules/icons.js','./care-backend.js','./vendor/supabase.js','./manifest.json','./assets/logo-azzera.png','./assets/favicon-a.svg','./assets/favicon-a-16.png','./assets/favicon-a-32.png','./assets/icons/apple-touch-care-large.png','./assets/icons/care-large-192.png','./assets/icons/care-large-512.png'];
+const CACHE='azzera-care-v3-shell-9';
+const ASSETS=['./index.html','./client.html','./style.css','./app.js','./modules/push.js','./modules/reports.js','./modules/domain.js','./modules/icons.js','./care-backend.js','./vendor/supabase.js','./manifest.json','./assets/logo-azzera.png','./assets/favicon-a.svg','./assets/favicon-a-16.png','./assets/favicon-a-32.png','./assets/icons/apple-touch-care-large.png','./assets/icons/care-large-192.png','./assets/icons/care-large-512.png'];
 const allowed=new Set(ASSETS.map(p=>new URL(p,self.location.href).href));
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('azzera-care-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
