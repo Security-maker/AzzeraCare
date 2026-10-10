@@ -1,0 +1,23 @@
+{
+  "name": "Azzera Care",
+  "short_name": "Care",
+  "description": "Plateforme d'intervention, de pilotage et de traçabilité Azzera Services+.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7f8f7",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "./assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "id": "./",
+  "scope": "./"
+}
