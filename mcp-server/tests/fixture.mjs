@@ -31,6 +31,7 @@ await pass('QG creates clients/sites with real SQL',async()=>{client=(await act(
 await db.exec(`create table auth.sessions(id uuid primary key,user_id uuid,not_after timestamptz);`);
 await db.exec(fs.readFileSync('supabase/migrations/20261011140817_care_mcp_secure_connector.sql','utf8'));
 await db.exec(fs.readFileSync('supabase/migrations/20261014160126_care_mcp_directory_creation.sql','utf8'));
+if(!globalThis.CARE_TEST_SKIP_CLIENT_MIGRATION)await db.exec(fs.readFileSync('supabase/migrations/20261014191808_care_mcp_client_creation.sql','utf8'));
 await db.query("update private.care_mcp_config set resource_url='https://mcp.example/functions/v1/care-mcp',enabled=true,organization_id=$1,oauth_client_ids=$2",[org,['test-client']]);
 await db.query('insert into private.care_mcp_members values($1,true,true),($2,true,true),($3,true,true)',[qg,a,c]);
 await db.query('insert into auth.sessions values($1,$2,null)',[uid(200),qg]);

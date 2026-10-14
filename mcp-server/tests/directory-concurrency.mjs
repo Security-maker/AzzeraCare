@@ -22,5 +22,8 @@ try{
  const sa=await proposal('create_site',{client_id:f.client,name:'Concurrent Site'}),sb=await proposal('create_site',{client_id:f.client,name:'Concurrent Site'});await approve(sa.plan_id);await approve(sb.plan_id);
  const sites=await Promise.allSettled([c1.query('select care_mcp_directory_claim($1) r',[sa.plan_id]),c2.query('select care_mcp_directory_claim($1) r',[sb.plan_id])]);
  assert.equal(sites.filter(x=>x.status==='fulfilled'&&x.value.rows[0].r.result.applied).length,1);assert.match(sites.find(x=>x.status==='rejected').reason.message,/ALREADY_EXISTS/);check('simultaneous site creation checks committed duplicates');
+ const ca=await proposal('create_client',{name:'Concurrent Client'}),cb=await proposal('create_client',{name:' concurrent CLIENT '});await approve(ca.plan_id);await approve(cb.plan_id);
+ const clients=await Promise.allSettled([c1.query('select care_mcp_directory_claim($1) r',[ca.plan_id]),c2.query('select care_mcp_directory_claim($1) r',[cb.plan_id])]);
+ assert.equal(clients.filter(x=>x.status==='fulfilled'&&x.value.rows[0].r.result.applied).length,1);assert.match(clients.find(x=>x.status==='rejected').reason.message,/CLIENT_ALREADY_EXISTS/);check('simultaneous client proposals create exactly one business client');
  console.log(JSON.stringify({postgres:(await admin.query('select version() v')).rows[0].v,checks:count,remote_connections:0}));
 }catch(e){console.error(e.message);process.exitCode=1;}finally{await c1?.end();await c2?.end();await admin?.end();await pg.stop();}

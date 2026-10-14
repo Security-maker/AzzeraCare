@@ -21,7 +21,7 @@ test('Native SDK: OAuth discovery challenge, initialize, list tools, typed call'
  const h=setup();let r=await h.handler(new Request(resource));assert.equal(r.status,401);assert.match(r.headers.get('www-authenticate'),/resource_metadata/);
  r=await h.handler(new Request(resource+'/.well-known/oauth-protected-resource'));assert.equal((await r.json()).resource,resource);
  r=await h.post(request('initialize',{protocolVersion:'2025-06-18',capabilities:{},clientInfo:{name:'test',version:'1'}}));assert.equal(r.status,200);assert.equal((await r.json()).result.serverInfo.name,'azzera-care');
- r=await h.post(request('tools/list'));const tools=(await r.json()).result.tools;assert.equal(tools.length,24);assert.equal(tools.find(t=>t.name==='confirm_planning_changes').annotations.destructiveHint,true);assert.equal(tools.find(t=>t.name==='get_planning').annotations.readOnlyHint,true);
+ r=await h.post(request('tools/list'));const tools=(await r.json()).result.tools;assert.equal(tools.length,25);assert.ok(tools.some(t=>t.name==='create_client')); assert.equal(tools.find(t=>t.name==='confirm_planning_changes').annotations.destructiveHint,true);assert.equal(tools.find(t=>t.name==='get_planning').annotations.readOnlyHint,true);
  r=await h.post(request('tools/call',{name:'get_planning',arguments:{date:'2026-10-25',period:'day'}}));let result=(await r.json()).result;assert.equal(result.structuredContent.data.total,0);assert.equal(Date.parse(result.structuredContent.data.to)-Date.parse(result.structuredContent.data.from),25*3600000);
  r=await h.post(request('tools/call',{name:'list_clients',arguments:{sql:'delete from profiles'}}));result=(await r.json()).result;assert.equal(result.isError,true);
 });

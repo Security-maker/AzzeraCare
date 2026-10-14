@@ -14,12 +14,13 @@
  function showDirectoryReview(r){
   review=r;mode='plan';$('heading').textContent='Vérifier la création';
   const root=$('content');root.replaceChildren();
-  root.append(el('h2',r.kind==='create_site'?'Créer un site':'Créer un compte agent'));
+  root.append(el('h2',{create_client:'Créer un client',create_site:'Créer un site',create_agent:'Créer un compte agent'}[r.kind]||'Création'));
   root.append(el('p','État : '+r.state+' — expiration : '+new Date(r.expires_at).toLocaleString('fr-FR',{timeZone:'Europe/Paris'})));
-  const names={client_id:'Client',name:'Nom du site',address:'Adresse',general_instructions:'Consignes générales',contacts:'Contacts',full_name:'Nom complet',email:'Adresse e-mail de connexion',role:'Rôle'};
+  const names={client_id:'Client',name:r.kind==='create_client'?'Nom du client':'Nom du site',address:'Adresse',general_instructions:'Consignes générales',contacts:'Contacts',full_name:'Nom complet',email:r.kind==='create_client'?'E-mail de contact':'Adresse e-mail de connexion',phone:'Téléphone',role:'Rôle'};
   const dl=el('dl');for(const [k,v] of Object.entries(r.payload)){
    dl.append(el('dt',names[k]||k),el('dd',k==='client_id'?(r.client_name||v):k==='role'?(v==='team_lead'?'Chef d’équipe':'Agent'):v));
   }root.append(dl);
+  if(r.kind==='create_client')root.append(el('p','Cette action crée uniquement une fiche client. Aucun compte de connexion ni site ne sera créé. Aucun e-mail ne sera envoyé. Après confirmation dans ChatGPT, un site pourra être rattaché à ce client.'));
   if(r.kind==='create_agent')root.append(el('p','Cette action crée un compte actif avec le mot de passe initial configuré par votre administrateur. Aucun e-mail ne sera envoyé. Aucun compte existant ne sera modifié. Le rôle ne définit pas le statut contractuel de la personne.'));
   if(r.result)root.append(el('p',r.result.applied?'Création confirmée.':'Création non confirmée. Faire contrôler le compte par le QG avant toute nouvelle tentative.'));
   root.hidden=false;$('actions').hidden=r.state!=='pending'||Date.parse(r.expires_at)<=Date.now();

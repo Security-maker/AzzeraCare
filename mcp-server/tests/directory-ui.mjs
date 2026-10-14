@@ -8,19 +8,20 @@ try{
  const mock=()=>{
   window.rpcCalls=[];
   window.supabase={createClient:()=>({auth:{getUser:async()=>({data:{user:{id:'qg'}}})},rpc:async(name,args)=>{
-   window.rpcCalls.push({name,args});const site=new URLSearchParams(location.search).get('plan')==='site';
-   return {data:{kind:site?'create_site':'create_agent',state:args.p_decision==='view'?'pending':args.p_decision==='approve'?'approved':'denied',expires_at:new Date(Date.now()+600000).toISOString(),client_name:'Client réel',payload:site?{name:'Site test',client_id:'client',general_instructions:'<img src=x onerror=alert(1)>'}:{full_name:'Agent Test',email:'agent@example.test',role:'agent'}}};
+   window.rpcCalls.push({name,args});const kind=new URLSearchParams(location.search).get('plan'),site=kind==='site',client=kind==='client';
+   return {data:{kind:client?'create_client':site?'create_site':'create_agent',state:args.p_decision==='view'?'pending':args.p_decision==='approve'?'approved':'denied',expires_at:new Date(Date.now()+600000).toISOString(),client_name:'Client réel',payload:client?{name:'IUT Université — test',email:'contact@example.test',phone:'0000000000',contacts:'<img src=x onerror=alert(1)>'}:site?{name:'Site test',client_id:'client',general_instructions:'<img src=x onerror=alert(1)>'}:{full_name:'Agent Test',email:'agent@example.test',role:'agent'}}};
   }})};
  };
  await p.route('**/vendor/supabase.js',route=>route.fulfill({contentType:'text/javascript',body:'('+mock.toString()+')()'}));
- for(const kind of ['site','agent']){
+ for(const kind of ['site','agent','client']){
   await p.goto(base+'/mcp-auth/index.html?directory=1&plan='+kind);
   await p.getByRole('heading',{name:'Vérifier la création'}).waitFor();
   assert.equal(await p.getByRole('button',{name:'Autoriser',exact:true}).isDisabled(),true);checks++;
   assert.equal(await p.locator('#content img').count(),0);assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);checks++;
   if(kind==='agent')assert.match(await p.locator('#content').innerText(),/Aucun e-mail ne sera envoyé/);
-  else assert.match(await p.locator('#content').innerText(),/Client réel/);
-  await p.screenshot({path:'output/mcp-directory-patch/approval-'+kind+'.png',fullPage:true});
+  else if(kind==='site')assert.match(await p.locator('#content').innerText(),/Client réel/);
+  else {assert.match(await p.locator('#content').innerText(),/E-mail de contact/);assert.equal(await p.getByRole('heading',{name:'Créer un client',exact:true}).count(),1);assert.match(await p.locator('#content').innerText(),/Aucun compte de connexion ni site/);}
+  await p.screenshot({path:'output/mcp-client-patch/approval-'+kind+'.png',fullPage:true});
   await p.getByRole('checkbox').check();await p.getByRole('button',{name:'Autoriser',exact:true}).click();await p.getByText(/Accord enregistré/).waitFor();
   const calls=await p.evaluate(()=>window.rpcCalls);assert.equal(calls.filter(c=>c.args.p_decision==='approve').length,1);assert.ok(calls.every(c=>c.name==='care_mcp_directory_review'));checks++;
  }

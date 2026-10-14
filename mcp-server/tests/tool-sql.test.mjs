@@ -16,14 +16,26 @@ test('MCP SDK → actual SQL business functions: real local read/write journey',
  }
  const detail=await call('get_intervention',{id});assert.equal(detail.structuredContent.data.agents[0].agent_id,b);assert.equal(detail.structuredContent.data.instructions,'Consigne conservée');
  const summary=await call('get_activity_summary',{from:'2027-02-01T00:00:00Z',to:'2027-03-01T00:00:00Z'});assert.equal(summary.structuredContent.data.total,1);
- const cancel=await call('cancel_intervention',{id,reason:'Test annulation MCP',request_key:crypto.randomUUID()});await approve(cancel.structuredContent.data.plan_id);assert.equal((await call('confirm_planning_changes',{plan_id:cancel.structuredContent.data.plan_id})).structuredContent.data.applied,true);assert.equal((await snap(qg)).interventions[0].status,'cancelled');const clients=await call('list_clients');const clientId=clients.structuredContent.data.items[0].id;
+ const cancel=await call('cancel_intervention',{id,reason:'Test annulation MCP',request_key:crypto.randomUUID()});await approve(cancel.structuredContent.data.plan_id);assert.equal((await call('confirm_planning_changes',{plan_id:cancel.structuredContent.data.plan_id})).structuredContent.data.applied,true);assert.equal((await snap(qg)).interventions[0].status,'cancelled');const clients=await call('list_clients');assert.ok(clients.structuredContent.data.items.length);
+ const clientPlan=await call('create_client',{name:'IUT Université de Toulon — test local',request_key:crypto.randomUUID()});
+ assert.equal(clientPlan.isError,undefined,JSON.stringify(clientPlan));
+ const cp=clientPlan.structuredContent.data.plan_id;
+ assert.equal((await call('list_clients',{search:'IUT Université'})).structuredContent.data.total,0);
+ assert.equal((await call('confirm_directory_creation',{plan_id:cp})).isError,true);
+ await rpc('care_mcp_directory_review',[cp,'approve'],qg,false);
+ const clientResult=await call('confirm_directory_creation',{plan_id:cp});assert.equal(clientResult.structuredContent.data.applied,true,JSON.stringify(clientResult));
+ const clientId=clientResult.structuredContent.data.client_id;assert.ok(clientId);
+ assert.deepEqual((await call('confirm_directory_creation',{plan_id:cp})).structuredContent.data,clientResult.structuredContent.data);
+ assert.equal((await call('list_clients',{search:'IUT Université'})).structuredContent.data.items[0].id,clientId);
+ assert.equal((await call('create_client',{name:'IUT Université de Toulon — test local',request_key:crypto.randomUUID()})).isError,true);
+ for(const bad of [{organization_id:clientId},{password:'refused'},{email:'invalid'}])assert.equal((await call('create_client',{name:'Client refusé',request_key:crypto.randomUUID(),...bad})).isError,true);
  const sitePlan=await call('create_site',{client_id:clientId,name:'Site créé via MCP',request_key:crypto.randomUUID()});
  assert.equal(sitePlan.isError,undefined,JSON.stringify(sitePlan));const directoryId=sitePlan.structuredContent.data.plan_id;
  assert.match(sitePlan.structuredContent.data.approval_url,/directory=1/);
  assert.equal((await call('confirm_directory_creation',{plan_id:directoryId})).isError,true);
  await rpc('care_mcp_directory_review',[directoryId,'approve'],qg,false);
  const siteResult=await call('confirm_directory_creation',{plan_id:directoryId});assert.equal(siteResult.structuredContent.data.applied,true,JSON.stringify(siteResult));
- assert.ok((await snap(qg)).sites.find(x=>x.id===siteResult.structuredContent.data.site_id));
+ assert.equal((await snap(qg)).sites.find(x=>x.id===siteResult.structuredContent.data.site_id)?.client_id,clientId);
  const agentPlan=await call('create_agent',{full_name:'Agent MCP',email:'agent@example.test',request_key:crypto.randomUUID()});assert.equal(agentPlan.isError,undefined,JSON.stringify(agentPlan));
  assert.equal(agentPlan.structuredContent.data.changes.role,'agent');
  for(const bad of [{password:'not-permitted'},{role:'qg_admin'}])assert.equal((await call('create_agent',{full_name:'Agent MCP',email:'agent@example.test',request_key:crypto.randomUUID(),...bad})).isError,true);
