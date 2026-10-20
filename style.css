@@ -598,3 +598,15 @@ button:active{transform:scale(.985)}
 @keyframes care-menu-enter-left{from{transform:translateX(-100%)}to{transform:translateX(0)}}
 @media(prefers-reduced-motion:no-preference){.care-navigation-dialog[open]{animation:care-menu-enter-left .2s ease-out}}
 .care-navigation-dialog.portal-client .care-menu-link.active{background:#e6f0de;border-color:#d1e1c4;color:#355b26}
+
+/* QG 1.3.1: observations et alertes de participation. */
+.care-observation{display:block;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}
+.task-comment{margin:10px 0;padding:12px 14px;border-left:3px solid #89ad61;background:#f1f6ed;border-radius:0 8px 8px 0;min-width:0}
+.task-comment .care-observation{margin:6px 0 0;color:#263d31}
+.participation-observation{display:block;margin-top:10px;padding-top:10px;border-top:1px solid #dce5d7;max-width:100%}
+.participation-observation>strong{display:block;font-size:12px;margin-bottom:5px}
+.participation-section .list-row>*{min-width:0;overflow-wrap:anywhere}
+.care-notification-button{position:relative}
+.care-notification-count{position:absolute;top:-6px;right:-6px;min-width:21px;height:21px;display:flex;align-items:center;justify-content:center;padding:0 4px;border-radius:12px;background:#8a2d24;color:#fff;border:2px solid #f8faf7;font-size:10px;font-weight:700}
+.document-table .document-prose{overflow-wrap:anywhere}
+@media(max-width:360px){.portal-qg .care-header-brand img{display:none}}
