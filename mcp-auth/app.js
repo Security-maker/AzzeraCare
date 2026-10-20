@@ -10,7 +10,7 @@
  const reviewRpc=directory?'care_mcp_directory_review':'care_mcp_review';
  let mode=null,review;
  const el=(tag,text)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;return x;};
- const labels={title:'Intitulé',site_id:'Site',starts_at:'Début',ends_at:'Fin',agent_ids:'Agents',service_type:'Prestation',description:'Description',instructions:'Consignes terrain',internal_notes:'Notes internes',plan_visible:'Visible au client avant réalisation',tasks:'Checklist',template_id:'Modèle de checklist',reason:'Motif'};
+ const labels={title:'Intitulé',site_id:'Site',starts_at:'Début',ends_at:'Fin',agent_ids:'Agents',service_type:'Prestation',description:'Description',instructions:'Consignes terrain',internal_notes:'Notes internes',plan_visible:'Visible au client avant réalisation',tasks:'Checklist',template_id:'Modèle de checklist',reason:'Motif',status:'État',client_summary:'Observations client',participations:'Pointages',name:'Nom',full_name:'Nom complet',active:'Actif',role:'Rôle',email:'E-mail de contact',phone:'Téléphone',contacts:'Contacts',client_id:'Client',address:'Adresse',general_instructions:'Consignes générales',access_notes:'Accès privés'};
  function showDirectoryReview(r){
   review=r;mode='plan';$('heading').textContent='Vérifier la création';
   const root=$('content');root.replaceChildren();
@@ -28,12 +28,16 @@
  }
  function showReview(r){
   review=r;$('heading').textContent='Vérifier la proposition';const root=$('content');root.replaceChildren();root.append(el('p','État : '+r.state+' — expiration : '+new Date(r.expires_at).toLocaleString('fr-FR',{timeZone:'Europe/Paris'})));
-  const display=(k,v)=>{if(v==null)return 'Non renseigné';if(k==='starts_at'||k==='ends_at')return new Date(v).toLocaleString('fr-FR',{timeZone:'Europe/Paris',timeZoneName:'short'});if(k==='agent_ids')return v.map(id=>r.labels?.agents.find(x=>x.id===id)?.name||id).join(', ');if(k==='site_id')return r.labels?.sites.find(x=>x.id===v)?.name||v;if(k==='tasks')return v.map(t=>t.label+(t.required?' — obligatoire':'')+(t.proof_required?' — preuve : '+t.proof_required:'')).join('\n');if(typeof v==='boolean')return v?'Oui':'Non';return typeof v==='object'?JSON.stringify(v):String(v);};
+  const display=(k,v)=>{if(v==null)return 'Non renseigné';if(k==='starts_at'||k==='ends_at')return new Date(v).toLocaleString('fr-FR',{timeZone:'Europe/Paris',timeZoneName:'short'});if(k==='agent_ids')return v.map(id=>r.labels?.agents.find(x=>x.id===id)?.name||id).join(', ');if(k==='site_id')return r.labels?.sites.find(x=>x.id===v)?.name||v;if(k==='tasks')return v.map(t=>t.label+(t.zone_label?' — '+t.zone_label:'')+(t.required?' — obligatoire':'')+(t.completed?' — réalisée':' — à faire')+(t.proof_required?' — preuve : '+t.proof_required:'')+(t.comment?' — '+t.comment:'')).join('\n');if(k==='participations')return v.map(a=>(r.labels?.agents.find(x=>x.id===a.agent_id)?.name||a.agent_id)+' : début '+display('starts_at',a.started_at)+', fin '+display('ends_at',a.ended_at)+(a.final_observation?' — '+a.final_observation:'')).join('\n');if(typeof v==='boolean')return v?'Oui':'Non';return typeof v==='object'?JSON.stringify(v):String(v);};
   for(const [idx,o] of r.operations.entries()){
-   const box=el('article'),kind={create:'Créer une intervention',update:'Modifier une intervention',cancel:'Annuler une intervention',accept_request:'Planifier une demande client'}[o.kind];
-   box.append(el('h2',(idx+1)+'. '+kind),el('p',o.before?.title||o.payload.title||''));
-   if(o.id)box.append(el('small','Intervention : '+o.id));if(o.request_id)box.append(el('small','Demande : '+o.request_id));
-   const dl=el('dl');for(const [k,v] of Object.entries(o.payload)){if(k==='id'||JSON.stringify(v)===JSON.stringify(o.before?.[k]))continue;dl.append(el('dt',labels[k]||k));const dd=el('dd');if(o.kind==='update'){const before=el('span','Avant : '+display(k,o.before?.[k]));before.className='before';dd.append(before);}dd.append(el('span',display(k,v)));dl.append(dd);}box.append(dl);root.append(box);
+   const box=el('article'),kind={create:'Créer une intervention',update:'Modifier une intervention',cancel:'Annuler une intervention',accept_request:'Planifier une demande client',delete:'Supprimer une intervention',update_client:'Modifier un client',update_site:'Modifier un site',update_agent:'Modifier un agent',delete_client:'Archiver un client',delete_site:'Archiver un site',delete_agent:'Archiver un agent'}[o.kind];
+   box.append(el('h2',(idx+1)+'. '+kind),el('p',o.before?.title||o.before?.name||o.before?.full_name||o.payload.title||''));
+   if(o.id)box.append(el('small','Fiche : '+o.id));if(o.request_id)box.append(el('small','Demande : '+o.request_id));
+   const dl=el('dl');for(const [k,v] of Object.entries(o.payload)){if(k==='id'||JSON.stringify(v)===JSON.stringify(o.before?.[k]))continue;dl.append(el('dt',labels[k]||k));const dd=el('dd');if(o.kind.startsWith('update')){const before=el('span','Avant : '+display(k,o.before?.[k]));before.className='before';dd.append(before);}dd.append(el('span',display(k,v)));dl.append(dd);}box.append(dl);
+   if(o.kind==='delete')box.append(el('p','Suppression de cette intervention, de sa checklist, ses pointages et son rapport. Historique QG conservé, fichiers conservés en stockage privé. Les demandes liées seront marquées annulées.'),el('p',`${o.before?.tasks?.length||0} tâche(s), ${o.before?.participations?.length||0} participation(s), ${o.before?.photos?.length||0} photo(s), ${o.before?.reports?.length||0} rapport(s).`));
+   if(o.kind.startsWith('delete_'))box.append(el('p','Archivage et désactivation des accès. Historiques et affectations conservés ; les missions existantes ne sont pas annulées. Réattribuer les missions si nécessaire.'));
+   if(o.kind==='update_site'&&o.payload.client_id!==o.before?.client_id)box.append(el('p','Le nouvel accès client s’appliquera à tout l’historique de ce site.'));
+   root.append(box);
   }
   root.hidden=false;mode='plan';$('actions').hidden=r.state!=='pending'||Date.parse(r.expires_at)<=Date.now();msg('Vérifie chaque changement. Ton accord porte uniquement sur cette proposition. ChatGPT devra ensuite l’exécuter');
  }
