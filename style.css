@@ -610,3 +610,36 @@ button:active{transform:scale(.985)}
 .care-notification-count{position:absolute;top:-6px;right:-6px;min-width:21px;height:21px;display:flex;align-items:center;justify-content:center;padding:0 4px;border-radius:12px;background:#8a2d24;color:#fff;border:2px solid #f8faf7;font-size:10px;font-weight:700}
 .document-table .document-prose{overflow-wrap:anywhere}
 @media(max-width:360px){.portal-qg .care-header-brand img{display:none}}
+
+/* Interventions 1.3.2 : filtres accessibles et liste compacte uniquement. */
+.intervention-browser{min-width:0}
+.intervention-filters{display:flex;align-items:flex-end;gap:16px;padding:18px;background:#edf2e9;border:1px solid #dce5d7;border-radius:18px}
+.intervention-filter{flex:1;min-width:0}
+.intervention-filter label{display:block;margin:0 0 7px 2px;font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:#526653}
+.intervention-select{position:relative;display:flex;align-items:center;background:#fff;border:1px solid #cbd8c6;border-radius:12px;transition:border-color .15s,box-shadow .15s}
+.intervention-select>.ui-icon{position:absolute;left:14px;width:19px;height:19px;color:#527449;pointer-events:none}
+.intervention-select select{appearance:none;-webkit-appearance:none;width:100%;min-width:0;min-height:48px;padding:11px 36px 11px 43px;border:0;border-radius:12px;background:transparent;color:#253e2e;font:inherit;font-size:14px;line-height:1.4;cursor:pointer;text-overflow:ellipsis}
+.intervention-select:focus-within{border-color:#527449;box-shadow:0 0 0 3px #86ad5a30}
+.intervention-select select:focus{outline:0}
+.filter-chevron{position:absolute;right:14px;top:50%;transform:translateY(-60%);color:#527449;pointer-events:none;font-size:20px}
+.filter-reset{min-height:48px;padding:10px 14px;border:1px solid #cbd8c6;border-radius:12px;background:#fff;color:#31583b;font:inherit;font-size:13px;font-weight:650;cursor:pointer;white-space:nowrap}
+.filter-reset:disabled{opacity:.45;cursor:default}
+.filter-reset:focus-visible{outline:2px solid #527449;outline-offset:3px}
+.intervention-results{display:flex;align-items:center;gap:5px;margin:18px 2px 10px;color:#627267;font-size:13px}
+.intervention-results strong{color:#294a34}.intervention-results>span{margin-left:auto;font-size:11px}
+.v3-shell .intervention-browser .mission-list{gap:8px}
+.v3-shell .intervention-browser .mission-card{padding:13px 18px;gap:14px;border-radius:13px;min-height:0;box-shadow:none}
+.v3-shell .intervention-browser .mission-card .eyebrow{font-size:10px;letter-spacing:.12em;line-height:1.3;margin:0}
+.v3-shell .intervention-browser .mission-card h3{font-size:15px;line-height:1.35;margin:3px 0 4px;letter-spacing:-.2px}
+.v3-shell .intervention-browser .mission-card p{font-size:12px;line-height:1.4;margin:0 0 4px}
+.v3-shell .intervention-browser .mission-card small{display:block;font-size:11px;line-height:1.4}
+.v3-shell .intervention-browser .mission-card>.status{flex-shrink:0;font-size:10px;padding:5px 9px}
+@media(max-width:650px){
+ .intervention-filters{flex-wrap:wrap;gap:12px;padding:14px}
+ .intervention-filter{flex-basis:100%}
+ .filter-reset{width:100%;min-height:44px}
+ .v3-shell .intervention-browser .mission-card{padding:12px;gap:8px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start}
+ .v3-shell .intervention-browser .mission-card h3{font-size:14px}
+ .v3-shell .intervention-browser .mission-card>.status{font-size:8px;padding:5px 6px;margin-top:2px}
+ .intervention-results>span{font-size:10px}
+}
