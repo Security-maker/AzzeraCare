@@ -643,3 +643,82 @@ button:active{transform:scale(.985)}
  .v3-shell .intervention-browser .mission-card>.status{font-size:8px;padding:5px 6px;margin-top:2px}
  .intervention-results>span{font-size:10px}
 }
+
+/* Care 1.4 · espace de travail, priorités QG et fiche lisible. */
+.care-workspace{--care-line:#dce5dc;--care-muted:#5d7065}
+.care-workspace .v3-main{padding-top:20px}
+.care-workspace .v3-top{min-height:48px;padding-bottom:14px;border-bottom:1px solid var(--care-line);margin-bottom:0}
+.workspace-context{font-size:13px;font-weight:650;color:#385241}.workspace-context>span{font-weight:400;color:#6b7c71}
+@media(min-width:769px){.care-workspace .care-header-brand{display:none}}
+.care-workspace .page-head{display:flex;align-items:center;justify-content:space-between;margin:24px 0;gap:20px}
+.care-workspace .page-head h1{font-size:30px;line-height:1.2;letter-spacing:-1px;margin:5px 0 0}
+.care-workspace .sync-state{margin:8px 0 0;font-size:11px}
+.care-workspace .page-head .head-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px}
+.care-workspace .card{padding:20px;border-radius:16px;box-shadow:none}
+.care-workspace .section{margin-top:22px}
+.care-workspace .record-grid{gap:14px}
+.care-workspace .record-grid h2{font-size:18px;line-height:1.35;margin:8px 0;overflow-wrap:anywhere}
+.care-workspace .record-grid p{font-size:13px;line-height:1.6;color:var(--care-muted)}
+.care-workspace .record-grid .btn{margin:4px 4px 0 0;padding:9px 12px;min-height:42px;font-size:12px}
+.care-workspace .btn[data-action^="delete-"]{color:#a13636;border-color:#e7cccc;background:#fffafa}
+.care-workspace .toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px;border:1px solid var(--care-line);border-radius:14px;background:#edf2e9}
+.care-workspace .toolbar .input{min-height:44px;padding:10px 13px;border:1px solid #cbd8c6;border-radius:10px;background:#fff;font:inherit;font-size:14px;color:#253e2e}
+.care-workspace .list-row{padding:14px 0;gap:16px;align-items:flex-start}
+.care-workspace .list-row>div{min-width:0}.care-workspace .list-row p{margin:5px 0;overflow-wrap:anywhere}
+.care-workspace.route-home{min-width:0}
+.care-workspace.route-home .mission-card,.care-workspace.route-docs .mission-card{padding:14px 18px;border-radius:13px;gap:12px;box-shadow:none}
+.care-workspace.route-home .mission-card h3,.care-workspace.route-docs .mission-card h3{font-size:15px;margin:4px 0}
+.care-workspace.route-home .mission-card p,.care-workspace.route-docs .mission-card p{font-size:12px;margin:3px 0}
+.care-workspace .metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:20px}
+.care-workspace .metrics .card{min-height:88px;padding:14px 16px;gap:9px;border-radius:13px}
+.care-workspace .metrics strong{font-size:26px}
+.qg-overview{border:1px solid #d5e1d2;border-radius:20px;background:#fff;overflow:hidden}
+.overview-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 24px 18px}
+.overview-heading h2{font-size:24px;margin:4px 0 0;letter-spacing:-.7px}.overview-date{font-size:12px;color:#5d7065;text-transform:capitalize}
+.attention-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:0 24px 20px}
+.attention-tile{display:grid;grid-template-columns:1fr auto;gap:12px;text-align:left;padding:16px;border:1px solid #dfe6dd;border-radius:13px;background:#f7f9f4;color:#35533e;font:inherit;cursor:pointer;min-width:0}
+.attention-tile .ui-icon{width:22px;height:22px;color:#73846e}.attention-tile strong{font-size:27px;line-height:1}.attention-tile span{grid-column:1/-1;font-size:12px;line-height:1.45}
+.attention-tile.has-items strong{color:#855818}.attention-tile[aria-pressed="true"]{background:#eaf2e2;border-color:#749759;box-shadow:inset 0 -3px #749759}
+.attention-detail{padding:18px 24px;border-top:1px solid var(--care-line);background:#fcfdfb}
+.attention-detail h3{font-size:15px;margin:0 0 6px}.attention-hint,.attention-empty{font-size:12px;color:#647267;line-height:1.6;margin:6px 0 12px}
+.attention-row{display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid #e6ebe3;padding:12px 0}
+.attention-row>div{min-width:0}.attention-row strong{font-size:13px;overflow-wrap:anywhere}.attention-row p{font-size:12px;color:#627267;margin:4px 0 0;line-height:1.5}.attention-row .btn{flex-shrink:0;padding:9px 14px;min-height:40px;font-size:12px}
+.attention-more summary{padding:12px 0;font-size:13px;font-weight:650;cursor:pointer}
+.care-workspace .intervention-filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;gap:14px}
+.intervention-search{grid-column:1/-2}
+.intervention-search input{width:100%;min-height:48px;border:1px solid #cbd8c6;border-radius:12px;background:#fff;color:#253e2e;padding:11px 14px;font:inherit;font-size:14px;box-sizing:border-box}
+.intervention-search input:focus{outline:2px solid #749759;outline-offset:2px}
+.care-workspace .intervention-filters .filter-reset{height:48px}
+.detail-back{display:inline-flex;align-items:center;min-height:40px;padding:8px 0;margin:-4px 0 10px;border:0;background:none;color:#385f40;font:inherit;font-size:13px;font-weight:650;cursor:pointer}
+.detail-sections{display:flex;flex-wrap:wrap;gap:6px;padding:8px;background:#eaf0e6;border:1px solid #dbe5d5;border-radius:13px;margin-bottom:16px}
+.detail-sections button{flex:1;min-height:42px;border:0;border-radius:8px;background:transparent;color:#35533e;font:inherit;font-size:13px;font-weight:650;cursor:pointer}
+.detail-sections button:hover,.detail-sections button:focus-visible{background:#fff}
+.care-workspace.route-detail section[id]{scroll-margin-top:20px}
+.care-workspace.route-detail section[id]:focus{outline:2px solid #90ad79;outline-offset:3px}
+.care-workspace .mission-summary h2{font-size:25px;line-height:1.3;margin:12px 0}
+.care-workspace .mission-summary p{font-size:14px;line-height:1.65}
+.care-workspace .mission-summary details{border-top:1px solid #e1e8de;margin-top:14px;padding-top:10px}
+.care-workspace .mission-summary summary,.care-workspace .participation-section summary{font-weight:650;cursor:pointer;min-height:36px;line-height:1.5;font-size:14px}
+.care-workspace .task-row{padding:16px 0}.care-workspace .task-row strong{font-size:14px}.care-workspace .task-row p{font-size:12px;line-height:1.6}
+.care-workspace .task-comment{margin-top:10px}.care-workspace .task-comment .care-observation{font-size:13px}
+.detail-management{position:relative;z-index:10}
+.detail-management>summary{list-style:none;min-height:44px;display:flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid #dce4db;border-radius:13px;background:#fff;font-size:13px;font-weight:650;cursor:pointer;box-sizing:border-box}
+.detail-management>summary::-webkit-details-marker{display:none}.detail-management>summary::after{content:'⌄'}
+.detail-management>div{position:absolute;right:0;top:calc(100% + 8px);width:260px;padding:10px;background:#fff;border:1px solid #dce4db;border-radius:14px;box-shadow:0 12px 30px #1933241c;display:grid;gap:6px}
+.detail-management .btn{text-align:left;width:100%}
+@media(max-width:1100px){.attention-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.care-workspace .intervention-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.intervention-search{grid-column:1/-1}.care-workspace .page-head{align-items:flex-start}}
+@media(max-width:768px){
+ .workspace-context{display:none}.care-workspace .v3-main{padding-top:12px}.care-workspace .v3-top{padding-bottom:10px}
+ .care-workspace .page-head{display:block;margin:20px 0}.care-workspace .page-head h1{font-size:27px}.care-workspace .page-head .head-actions{justify-content:flex-start;margin-top:14px}
+ .care-workspace .card{padding:18px}.care-workspace .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .overview-heading{display:block;padding:18px}.overview-heading h2{font-size:22px}.overview-date{display:block;margin-top:8px}
+ .attention-grid{padding:0 14px 14px;gap:8px}.attention-tile{padding:12px;gap:9px}.attention-tile span{font-size:11px}.attention-tile strong{font-size:24px}
+ .attention-detail{padding:16px}.attention-row{align-items:flex-start}.attention-row .btn{min-height:44px}
+ .care-workspace .intervention-filters{padding:14px;gap:12px}.intervention-select select{font-size:13px;padding-left:37px;padding-right:26px}.intervention-select>.ui-icon{left:11px;width:17px}.filter-chevron{right:10px}
+ .care-workspace .mission-summary h2{font-size:22px}.detail-sections{gap:4px}.detail-sections button{flex:1 1 28%;font-size:12px;min-height:44px}
+ .detail-management>div{left:0;right:auto;width:min(260px,calc(100vw - 52px))}.care-workspace .mission-summary p{font-size:13px}
+}
+@media(max-width:380px){.care-workspace .intervention-filters{grid-template-columns:minmax(0,1fr)}.attention-row{flex-wrap:wrap}.attention-row>div{flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){.care-workspace *{scroll-behavior:auto!important;transition:none!important}}
+
+@media(min-width:1101px){.care-workspace.portal-qg .metrics{grid-template-columns:repeat(5,minmax(0,1fr))}}
